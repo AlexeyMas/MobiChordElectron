@@ -2,19 +2,49 @@
 <html>
   <head>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="src/styles/nav.css">
+    <link rel="stylesheet" href="src/styles/global.css">
+    <link rel="stylesheet" href="src/styles/variables.css">
+    <link rel="stylesheet" href="src/styles/section.css">
+
+    <link rel="import" href="src/app/sanitizer/sanitizer.html">
+
     <title>Hello MobiChord!</title>
   </head>
   <body>
+    <nav class="nav js-nav is-shown">
+      <header class="nav-header">
+          <svg class="nav-header-icon"><img src="src/img/MobiChord.JPG" width="65%"></svg><h1 class="nav-title" width="25%">Helper</h1>
+      </header>
+
+      <div class="nav-item u-category-windows">
+          <h5 class="nav-category">
+              <svg class="nav-icon"><use xlink:href="src/img/icons.svg#icon-windows"></use></svg>
+              Tools
+          </h5>
+          <button type="button" id="button-sanitizer" data-section="sanitizer" class="nav-button">Sanitizer</button>
+      </div>
+    </nav>
+
+    <main class="content js-content"></main>
     <h1>Hello World!</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
+    <div id="holder" >
+      <p style="border: 1px solid black; height: 50px; text-align-all: center; color: gray">
+        Drag your file here
+      </p>
+    </div>
   </body>
 
   <script>
     // You can also require other files to run in this process
+    require('./src/app/imports.js')
     require('./renderer.js')
-    require('./app/sanitizer/sanitizer_app.js')
+    require('./src/app/sanitizer/sanitizer.js')
+    require('./src/app/nav.js')
   </script>
 </html>

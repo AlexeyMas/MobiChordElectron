@@ -1,6 +1,19 @@
-var fs = require('fs')
+var fs = require('fs');
 
-const holder = document.getElementById('holder')
+const holder = document.getElementById('holder');
+const attachedFiles = document.getElementById('files');
+
+function addAttachedFileEl(file) {
+	var divEl = document.createElement('div');
+	var linkEl = document.createElement('a');
+	linkEl.href = file.path;
+	linkEl.text = file.name;
+	linkEl.style = 'color: green;';
+	divEl.appendChild(linkEl);
+	divEl.append(' has been sanitized and automatically downloaded.');
+	attachedFiles.appendChild(divEl);
+}
+
 holder.ondragover = () => {
 	return false;
 }
@@ -8,9 +21,9 @@ holder.ondragleave = holder.ondragend = () => {
 	return false;
 }
 holder.ondrop = (e) => {
-	e.preventDefault()
+	e.preventDefault();
 	for (let f of e.dataTransfer.files) {
-		console.log('File(s) you dragged here: ', f.path)
+		console.log('File(s) you dragged here: ', f.path);
 		//var source = 'C:\\Migration\\MobiChord Telecom Service Platform.xml';
 		//var target = "c:\\MIGRATION\\res1.xml";
 		fs.readFile(f.path, 'utf8', function(err, data) {
@@ -27,9 +40,11 @@ holder.ondrop = (e) => {
 			fs.writeFile(f.path+'san', data, 'utf8', function(err) {
 				if (err) {
 					return console.log(err);
-				};
+				}
 			});
-		});
+
+			addAttachedFileEl(f);
+	});
 		//var content = fs.readFileSync(f.path)
 		//alert(content)
 	}

@@ -5,13 +5,22 @@ const attachedFiles = document.getElementById('files');
 
 function addAttachedFileEl(file) {
 	var divEl = document.createElement('div');
-	var linkEl = document.createElement('a');
-	linkEl.href = file.path;
-	linkEl.text = file.name;
-	linkEl.style = 'color: green;';
-	divEl.appendChild(linkEl);
-	divEl.append(' has been sanitized and automatically downloaded.');
+	if (file) {
+		var linkEl = document.createElement('a');
+		linkEl.href = file.path;
+		linkEl.target = '_blank';
+		linkEl.text = file.name;
+		linkEl.style = 'color: green;';
+		divEl.appendChild(linkEl);
+		divEl.append(' has been sanitized and automatically downloaded.');
+	} else {
+		divEl.append('The file type should be XML.');
+	}
 	attachedFiles.appendChild(divEl);
+}
+
+function getSanitizedFileName(fileName) {
+	return fileName.substr(0, fileName.length - 4) + ' (sanitized).xml';
 }
 
 holder.ondragover = () => {
@@ -23,6 +32,10 @@ holder.ondragleave = holder.ondragend = () => {
 holder.ondrop = (e) => {
 	e.preventDefault();
 	for (let f of e.dataTransfer.files) {
+		if (f.name.indexOf('.xml') == -1) {
+			addAttachedFileEl();
+			continue;
+		}
 		console.log('File(s) you dragged here: ', f.path);
 		//var source = 'C:\\Migration\\MobiChord Telecom Service Platform.xml';
 		//var target = "c:\\MIGRATION\\res1.xml";
@@ -37,7 +50,8 @@ holder.ondrop = (e) => {
 			data = data.replace('<sys_customer_update>true</sys_customer_update>', '<sys_customer_update>false</sys_customer_update>');
 			data = data.replace('&lt;sys_customer_update&gt;true&lt;/sys_customer_update&gt;', '&lt;sys_customer_update&gt;false&lt;/sys_customer_update&gt;');
 
-			fs.writeFile(f.path+'san', data, 'utf8', function(err) {
+			var newName = getSanitizedFileName(f.path);
+			fs.writeFile(newName, data, 'utf8', function(err) {
 				if (err) {
 					return console.log(err);
 				}

@@ -72,5 +72,5 @@ if (sectionId) {
 	if (section) section.click()
 } else {
 	activateDefaultSection()
-	displayAbout()
+	//displayAbout()
 }

@@ -1,11 +1,17 @@
 <template class="task-template">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <section id="sanitizer-section" class="section js-section u-category-windows">
         <header class="section-header">
             <div class="section-wrapper" style="border: 0">
-                <h1>
-                    Sanitizer
-                </h1>
-
+                <div style="float: left;">
+                    <i class="material-icons">find_replace</i>
+                </div>
+                <div style="margin-top: -5px;">
+                    <h1>
+                        Sanitizer
+                    </h1>
+                </div>
                 <p>In order to update the application from the <a href="https://store.servicenow.com/$appstore.do#!/store/application/58458eaa4f5a7100b722a5017310c7f2/2.3.26" style="color: purple">ServiceNow store</a> the full Update Set has to be applied to reset customization. Please note that it should be done only once. After that all Update Sets (hotfixes/patches) should be sanitized.
 
                 <ol>
@@ -23,7 +29,9 @@
 
         <div class="section-wrapper demo" style="border: 0">
             <div id="holder">
-                <p style="border: 1px solid lightgray; height: 50px; text-align-all: center; color: gray">
+                <p style="border: 1px solid lightgray; height: 250px; text-align: center; color: gray">
+                    <i class="material-icons">cloud_upload</i>
+                    <br/>
                     Drag your file here
                 </p>
             </div>

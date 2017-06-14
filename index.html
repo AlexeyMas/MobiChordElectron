@@ -28,23 +28,12 @@
     </nav>
 
     <main class="content js-content"></main>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-    <div id="holder" >
-      <p style="border: 1px solid black; height: 50px; text-align-all: center; color: gray">
-        Drag your file here
-      </p>
-    </div>
   </body>
 
   <script>
     // You can also require other files to run in this process
     require('./src/app/imports.js')
     require('./renderer.js')
-    require('./src/app/sanitizer/sanitizer.js')
     require('./src/app/nav.js')
   </script>
 </html>
